@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url(IMGS/bg-home-2.jpg);
+}
+
+.App {
+  background: transparent;
+  border: 3px solid white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 60vh;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: white;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+label:hover {
+  background: #4f60ce;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 5px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #4f60ce;
+}
+
+pre {
+  text-align: left;
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.choiced-text {
+  color: white;
+  padding: 2px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .App {
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  label,
+  button {
+    width: 100%;
+  }
+}

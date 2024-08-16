@@ -4,6 +4,7 @@ import "./index.css";
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
+  const [message] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -13,7 +14,7 @@ function App() {
 
   const handleUpload = async () => {
     if (!file) {
-      alert("Por favor, selecione um arquivo primeiro.");
+      console.error("Por favor, selecione um arquivo primeiro.");
       return;
     }
 
@@ -21,24 +22,20 @@ function App() {
     formData.append("file", file);
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:5000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-      if (response.status === 200) {
-        alert("Upload realizado com sucesso");
+      if (response.data && response.data.message === "Conversão bem-sucedida") {
+        console.log("Upload e conversão realizados com sucesso.");
       } else {
-        alert("Falha no upload");
+        console.error("Falha no upload ou na conversão.");
       }
     } catch (error) {
-      console.error("Error uploading file:", error);
-      alert("Falha no upload");
+      console.error("Erro ao realizar o upload:", error);
+      console.error("Verifique se o servidor está rodando e tente novamente.");
     }
   };
 
@@ -48,7 +45,8 @@ function App() {
       <input id="file-upload" type="file" onChange={handleFileChange} />
       <label htmlFor="file-upload">Escolha o arquivo</label>
       <button onClick={handleUpload}>Upload e conversão</button>
-      {file && <p className="choiced-text">Arquivo selecionado: {file.name}</p>}
+      {!message && file && <p className="choiced-text">Arquivo selecionado: {file.name}</p>}
+      {message && <p className="message-text">{message}</p>}
     </div>
   );
 }
